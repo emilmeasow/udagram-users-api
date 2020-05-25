@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: udagram-users-api
+  name: udagram-users-api-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        service: udagram-users-api
+    spec:
+      containers:
+      - image: emileasow/udagram-users-api:latest
+        name: udagram-users-api
+        imagePullPolicy: Always          
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"       
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
